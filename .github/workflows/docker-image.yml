@@ -20,7 +20,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-          repository: caymankey/app
+          repository: githubaction/app
           tags: latest, ${{ github.run_number }}
       - name: Log in to the Container registry
         uses: docker/login-action@v2
