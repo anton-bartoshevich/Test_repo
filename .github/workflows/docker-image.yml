@@ -39,5 +39,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-          repository: githubaction/app
+          repository: caymankey/app
           tags: latest, ${{ github.run_number }}
