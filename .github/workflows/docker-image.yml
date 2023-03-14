@@ -23,16 +23,6 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/anton-bartoshevich/docker_build:${{ github.run_number }}
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_CHANNEL: general
-          SLACK_COLOR: ${{ job.status }} 
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: 'Build ${{ github.run_number }} OK'
-          SLACK_TITLE: 'Post tilte'
-          SLACK_USERNAME: rtCamp
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -44,3 +34,27 @@ jobs:
           context: .
           push: true
           tags: caymankey/app:${{ github.run_number }}
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        if: success()
+        env:
+          SLACK_CHANNEL: general
+          SLACK_COLOR: 'green' 
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: 'Build ${{ github.run_number }} is SUCCESS'
+          SLACK_TITLE: 'Post tilte'
+          SLACK_USERNAME: rtCamp
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        if: failure()
+        env:
+          SLACK_CHANNEL: general
+          SLACK_COLOR: 'red'
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: 'Build ${{ github.run_number }} is FAILED'
+          SLACK_TITLE: 'Post tilte'
+          SLACK_USERNAME: rtCamp
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}  
+          
+          
