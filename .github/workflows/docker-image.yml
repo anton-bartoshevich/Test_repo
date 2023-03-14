@@ -29,8 +29,8 @@ jobs:
           SLACK_CHANNEL: general
           SLACK_COLOR: ${{ job.status }} 
           SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: 'Build OK'
-          SLACK_TITLE: 'Post Title'
+          SLACK_MESSAGE: 'Build ${{ github.run_number }} OK'
+          SLACK_TITLE: 'Post tilte'
           SLACK_USERNAME: rtCamp
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       - name: Login to Docker Hub
